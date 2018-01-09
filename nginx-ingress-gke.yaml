@@ -1,0 +1,134 @@
+
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/tls-acme: "true"
+  name: mayadata-nginx-ingress
+spec:
+  tls:
+    - hosts:
+        - mayadata.io
+        - www.mayadata.io
+        - openebs.org
+        - www.openebs.org
+        - staging.mayadata.io
+        - staging.openebs.io
+        - www.openebs.io
+        - openebs.io
+        - register.openebs.io
+        - regapp.openebs.io
+      secretName: mayadata-secret
+  rules:
+    - host: mayadata.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: www-mayadata-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
+    - host: www.mayadata.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: www-mayadata-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
+    - host: staging.mayadata.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: stage-mayadata-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
+    - host: openebs.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: www-openebs-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
+    - host: register.openebs.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: register-openebs-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
+    - host: regapp.openebs.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: app-openebs-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
+    - host: www.openebs.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: www-openebs-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
+    - host: staging.openebs.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: stage-openebs-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
+    - host: openebs.org
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: www-openebs-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
+    - host: www.openebs.org
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: www-openebs-service
+              servicePort: 80
+          - path: /echo/
+            backend:
+              serviceName: echoheaders
+              servicePort: 80
